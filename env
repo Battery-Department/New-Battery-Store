@@ -9,11 +9,11 @@ PUBLIC_CHECKOUT_DOMAIN=www.weaverse.dev
 
 ## Optional
 PUBLIC_STOREFRONT_ID=1000033068
-# PRIVATE_STOREFRONT_API_TOKEN="your-private-storefront-api-token"
+PRIVATE_STOREFRONT_API_TOKEN=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
 
 # Weaverse
-WEAVERSE_PROJECT_ID=clptu3l4p001sxfsn1u9jzqnm
-# WEAVERSE_API_KEY="your-weaverse-api-key"
+WEAVERSE_PROJECT_ID=s9ucdpjajwyiioa28x4rek83
+WEAVERSE_API_KEY=VO0mFY4dvBcQPPAH9Scoax9xaoSalEr6LBI9IZXIFe8famuu
 
 # Additional services
 # PUBLIC_GOOGLE_GTM_ID=G-R1KFYYKE48
@@ -28,6 +28,6 @@ CUSTOM_COLLECTION_BANNER_METAFIELD="custom.collection_banner"
 # Shopify Inbox
 ## https://github.com/juanpprieto/hydrogen-chat-inbox?tab=readme-ov-file#1-find-your-shopify-inbox-shop-id
 PUBLIC_SHOPIFY_INBOX_SHOP_ID=your-shopify-inbox-shop-id
-WEAVERSE_PROJECT_ID=k1f80timywbjsf3082d0djzx
+WEAVERSE_PROJECT_ID=s9ucdpjajwyiioa28x4rek83
 PRIVATE_STOREFRONT_API_TOKEN=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
 PUBLIC_CUSTOMER_ACCOUNT_API_URL=https://shopify.com/66548400299
