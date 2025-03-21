@@ -1,0 +1,33 @@
+# Replace the values with your own
+SESSION_SECRET=06bddadb7d7fdb51de8e46f9529e6703e6e21bd1
+
+PUBLIC_STORE_DOMAIN=180990-20.myshopify.com
+PUBLIC_STOREFRONT_API_TOKEN=abd4f2a53806a533fc9c5ffdf81155fe
+PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID=shp_8e711f0f-512c-454b-b3b4-afd8a07a2fee
+SHOP_ID=66548400299
+PUBLIC_CHECKOUT_DOMAIN=www.weaverse.dev
+
+## Optional
+PUBLIC_STOREFRONT_ID=1000033068
+# PRIVATE_STOREFRONT_API_TOKEN="your-private-storefront-api-token"
+
+# Weaverse
+WEAVERSE_PROJECT_ID=clptu3l4p001sxfsn1u9jzqnm
+# WEAVERSE_API_KEY="your-weaverse-api-key"
+
+# Additional services
+# PUBLIC_GOOGLE_GTM_ID=G-R1KFYYKE48
+# JUDGEME_PRIVATE_API_TOKEN="your-judgeme-private-api-token"
+# ALI_REVIEWS_API_KEY="your-ali-reviews-api-key"
+
+# Custom metafields & metaobjects
+METAOBJECT_COLORS_TYPE="shopify--color-pattern"
+CUSTOM_COLLECTION_BANNER_METAFIELD="custom.collection_banner"
+
+
+# Shopify Inbox
+## https://github.com/juanpprieto/hydrogen-chat-inbox?tab=readme-ov-file#1-find-your-shopify-inbox-shop-id
+PUBLIC_SHOPIFY_INBOX_SHOP_ID=your-shopify-inbox-shop-id
+WEAVERSE_PROJECT_ID=k1f80timywbjsf3082d0djzx
+PRIVATE_STOREFRONT_API_TOKEN=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
+PUBLIC_CUSTOMER_ACCOUNT_API_URL=https://shopify.com/66548400299
