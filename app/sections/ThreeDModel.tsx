@@ -1,15 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
-import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 // Define the component for rendering the 3D model
 const Model = () => {
-  const { scene } = useGLTF("https://cdn.shopify.com/3d/models/34d56510907ddc90/TestBat18_1_.glb");
+  const { scene, error } = useGLTF("https://cdn.shopify.com/3d/models/34d56510907ddc90/TestBat18_1_.glb");
 
-  return (
-    <primitive object={scene} scale={0.5} position={[0, -1, 0]} />
-  );
+  if (error) {
+    return <p>Error loading model</p>; // Display error message if model fails to load
+  }
+
+  return <primitive object={scene} scale={0.5} position={[0, -1, 0]} />;
 };
 
 const ThreeDModel = () => {
@@ -18,9 +19,7 @@ const ThreeDModel = () => {
   // This hook ensures the model is loaded before rendering
   useEffect(() => {
     const loadModel = async () => {
-      await new Promise((resolve) => {
-        setTimeout(resolve, 1000); // Simulate loading delay for optimization
-      });
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate loading delay
       setIsLoaded(true);
     };
 
