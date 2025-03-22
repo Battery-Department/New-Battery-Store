@@ -3,13 +3,8 @@ import { type VariantProps, cva } from "class-variance-authority";
 import clsx from "clsx";
 import { forwardRef } from "react";
 import Heading from "~/components/heading";
-import Link, {
-  type LinkProps,
-  type LinkStyleProps,
-  linkStylesInputs,
-} from "~/components/link";
+import Link, { type LinkProps, type LinkStyleProps, linkStylesInputs } from "~/components/link";
 import Paragraph from "~/components/paragraph";
-import type { SectionProps } from "~/components/section";
 import { Section } from "~/components/section";
 
 let variants = cva("", {
@@ -31,9 +26,9 @@ interface MapSectionProps
   extends Omit<SectionProps, "backgroundColor">,
     VariantProps<typeof variants>,
     LinkStyleProps {
-  address: string;
   heading: string;
   description: string;
+  customHtmlContent: string; // Accept HTML content
   alignment: "left" | "center" | "right";
   buttonVariant: LinkProps["variant"];
   buttonText: LinkProps["children"];
@@ -48,7 +43,7 @@ let MapSection = forwardRef<HTMLElement, MapSectionProps>((props, ref) => {
     alignment,
     heading,
     description,
-    address,
+    customHtmlContent, // Use custom HTML content
     boxBgColor,
     boxTextColor,
     boxBorderRadius,
@@ -67,15 +62,11 @@ let MapSection = forwardRef<HTMLElement, MapSectionProps>((props, ref) => {
     <Section
       ref={ref}
       {...rest}
-      containerClassName={clsx(
-        "flex items-start p-6 md:p-12",
-        variants({ height, alignment }),
-      )}
+      containerClassName={clsx("flex items-start p-6 md:p-12", variants({ height, alignment }))}
     >
-      <iframe
-        className="w-full h-full object-cover absolute inset-0 z-[-1]"
-        title="Google map embedded frame"
-        src={`https://maps.google.com/maps?t=m&q=${address}&ie=UTF8&&output=embed`}
+      <div
+        className="w-full h-full object-cover relative z-[-1]"
+        dangerouslySetInnerHTML={{ __html: customHtmlContent }} // Render custom HTML
       />
       <div
         className="w-80 max-w-full shadow-2xl p-8 space-y-3 md:space-y-6"
@@ -86,11 +77,10 @@ let MapSection = forwardRef<HTMLElement, MapSectionProps>((props, ref) => {
         }}
       >
         {heading && <Heading content={heading} as="h6" alignment="left" />}
-        {address && <Paragraph content={address} />}
         {description && <Paragraph content={description} />}
         {buttonText && (
           <Link
-            to={`https://www.google.com/maps/search/${address}`}
+            to={`https://www.google.com/maps/search/${description}`} // Change this to relevant URL or action
             openInNewTab
             variant={buttonVariant}
             backgroundColor={backgroundColor}
@@ -111,8 +101,8 @@ let MapSection = forwardRef<HTMLElement, MapSectionProps>((props, ref) => {
 export default MapSection;
 
 export let schema: HydrogenComponentSchema = {
-  type: "map",
-  title: "Map",
+  type: "map",  // You can keep the type as "map" or change it to something like "custom-html"
+  title: "Custom HTML Section",
   inspector: [
     {
       group: "Layout",
@@ -137,11 +127,7 @@ export let schema: HydrogenComponentSchema = {
           configs: {
             options: [
               { value: "left", label: "Left", icon: "align-start-vertical" },
-              {
-                value: "center",
-                label: "Center",
-                icon: "align-center-vertical",
-              },
+              { value: "center", label: "Center", icon: "align-center-vertical" },
               { value: "right", label: "Right", icon: "align-end-vertical" },
             ],
           },
@@ -150,32 +136,31 @@ export let schema: HydrogenComponentSchema = {
       ],
     },
     {
-      group: "Address box",
+      group: "Custom HTML",
       inputs: [
         {
-          type: "text",
-          name: "address",
-          label: "Address",
-          defaultValue: "301 Front St W, Toronto, ON M5V 2T6, Canada",
+          type: "richtext",  // Use richtext for HTML content input
+          label: "Custom HTML Content",
+          name: "customHtmlContent",  // Field for custom HTML content
+          defaultValue: "<p>Insert your custom HTML content here.</p>",  // Example default content
         },
         {
           type: "text",
           name: "heading",
           label: "Heading",
-          defaultValue: "Our store address",
+          defaultValue: "Custom HTML Section",
         },
         {
           type: "richtext",
           label: "Description",
           name: "description",
-          defaultValue:
-            "<p>Mon - Fri, 8:30am - 10:30pm</p><p>Saturday, 8:30am - 10:30pm</p><p>Sunday, 8:30am - 10:30pm</p>",
+          defaultValue: "<p>Enter your description here.</p>",
         },
         {
           type: "color",
           name: "boxBgColor",
           label: "Background color",
-          defaultValue: "#fff",
+          defaultValue: "#ffffff",
         },
         {
           type: "color",
@@ -203,7 +188,6 @@ export let schema: HydrogenComponentSchema = {
           name: "buttonText",
           label: "Button text",
           defaultValue: "Get directions",
-          placeholder: "Get directions",
         },
         {
           type: "select",
@@ -215,7 +199,6 @@ export let schema: HydrogenComponentSchema = {
               { label: "Secondary", value: "secondary" },
               { label: "Outline", value: "outline" },
               { label: "Link", value: "link" },
-              { label: "Custom styles", value: "custom" },
             ],
           },
           defaultValue: "primary",
