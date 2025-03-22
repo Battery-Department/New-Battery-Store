@@ -22,7 +22,7 @@ export let themeSchema: HydrogenThemeSchema = {
   defaultLocale: "en-us",
   inspector: [
     {
-      group: "Content",  // This groups it under Content, you can change this if needed
+      group: "Custom sections",  // This groups it under Content, you can change this if needed
       inputs: [
         {
           type: "custom-html",  // This type will trigger the custom HTML input section
