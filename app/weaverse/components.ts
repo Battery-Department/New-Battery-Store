@@ -1,6 +1,7 @@
 import type { HydrogenComponent } from "@weaverse/hydrogen";
 import * as Heading from "~/components/heading";
 import * as CustomHtmlSection from "~/sections/custom-html";
+import * as ThreeDModel from "~/sections/ThreeDModel";
 import * as Link from "~/components/link";
 import * as Paragraph from "~/components/paragraph";
 import * as Judgeme from "~/components/product/judgeme-review";
@@ -62,6 +63,7 @@ export let components: HydrogenComponent[] = [
   Paragraph,
   Link,
   CustomHtmlSection,
+  ThreeDModel,
   // AliReview,
   // AliReviewList,
   AllProducts,
