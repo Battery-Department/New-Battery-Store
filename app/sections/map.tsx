@@ -2,9 +2,6 @@ import type { HydrogenComponentSchema } from "@weaverse/hydrogen";
 import { type VariantProps, cva } from "class-variance-authority";
 import clsx from "clsx";
 import { forwardRef } from "react";
-import Heading from "~/components/heading";
-import Link, { type LinkProps, type LinkStyleProps, linkStylesInputs } from "~/components/link";
-import Paragraph from "~/components/paragraph";
 import { Section } from "~/components/section";
 
 let variants = cva("", {
@@ -24,76 +21,27 @@ let variants = cva("", {
 
 interface CustomHtmlSectionProps
   extends Omit<SectionProps, "backgroundColor">,
-    VariantProps<typeof variants>,
-    LinkStyleProps {
-  heading: string;
-  description: string;
+    VariantProps<typeof variants> {
   customHtmlContent: string; // Accept HTML content
   alignment: "left" | "center" | "right";
-  buttonVariant: LinkProps["variant"];
-  buttonText: LinkProps["children"];
   boxBgColor: string;
   boxTextColor: string;
   boxBorderRadius: number;
 }
 
 let CustomHtmlSection = forwardRef<HTMLElement, CustomHtmlSectionProps>((props, ref) => {
-  let {
-    height,
-    alignment,
-    heading,
-    description,
-    customHtmlContent, // Use custom HTML content
-    boxBgColor,
-    boxTextColor,
-    boxBorderRadius,
-    buttonText,
-    buttonVariant,
-    backgroundColor,
-    textColor,
-    borderColor,
-    backgroundColorHover,
-    textColorHover,
-    borderColorHover,
-    ...rest
-  } = props;
+  let { customHtmlContent, boxBgColor, boxTextColor, boxBorderRadius, ...rest } = props;
 
   return (
     <Section
       ref={ref}
       {...rest}
-      containerClassName={clsx("flex items-start p-6 md:p-12", variants({ height, alignment }))}
+      containerClassName={clsx("flex items-start p-6 md:p-12", variants({ alignment: props.alignment }))}
     >
       <div
         className="w-full h-full object-cover relative z-[-1]"
         dangerouslySetInnerHTML={{ __html: customHtmlContent }} // Render custom HTML
       />
-      <div
-        className="w-80 max-w-full shadow-2xl p-8 space-y-3 md:space-y-6"
-        style={{
-          backgroundColor: boxBgColor,
-          color: boxTextColor,
-          borderRadius: `${boxBorderRadius}px`,
-        }}
-      >
-        {heading && <Heading content={heading} as="h6" alignment="left" />}
-        {description && <Paragraph content={description} />}
-        {buttonText && (
-          <Link
-            to="#"
-            openInNewTab
-            variant={buttonVariant}
-            backgroundColor={backgroundColor}
-            textColor={textColor}
-            borderColor={borderColor}
-            backgroundColorHover={backgroundColorHover}
-            textColorHover={textColorHover}
-            borderColorHover={borderColorHover}
-          >
-            {buttonText}
-          </Link>
-        )}
-      </div>
     </Section>
   );
 });
@@ -145,18 +93,6 @@ export let schema: HydrogenComponentSchema = {
           defaultValue: "<p>Insert your custom HTML content here.</p>",  // Example default content
         },
         {
-          type: "text",
-          name: "heading",
-          label: "Heading",
-          defaultValue: "Custom HTML Section",
-        },
-        {
-          type: "richtext",
-          label: "Description",
-          name: "description",
-          defaultValue: "<p>Enter your description here.</p>",
-        },
-        {
           type: "color",
           name: "boxBgColor",
           label: "Background color",
@@ -179,31 +115,6 @@ export let schema: HydrogenComponentSchema = {
           },
           defaultValue: 0,
         },
-        {
-          type: "heading",
-          label: "Direction button (optional)",
-        },
-        {
-          type: "text",
-          name: "buttonText",
-          label: "Button text",
-          defaultValue: "Get directions",
-        },
-        {
-          type: "select",
-          name: "variant",
-          label: "Variant",
-          configs: {
-            options: [
-              { label: "Primary", value: "primary" },
-              { label: "Secondary", value: "secondary" },
-              { label: "Outline", value: "outline" },
-              { label: "Link", value: "link" },
-            ],
-          },
-          defaultValue: "primary",
-        },
-        ...linkStylesInputs,
       ],
     },
   ],
