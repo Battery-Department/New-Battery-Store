@@ -32,16 +32,30 @@ interface CustomHtmlSectionProps
 let CustomHtmlSection = forwardRef<HTMLElement, CustomHtmlSectionProps>((props, ref) => {
   let { customHtmlContent, boxBgColor, boxTextColor, boxBorderRadius, ...rest } = props;
 
+  const handleButtonClick = () => {
+    alert('Button clicked!');
+  };
+
   return (
     <Section
       ref={ref}
       {...rest}
-      containerClassName={clsx("flex items-start p-6 md:p-12 relative", variants({ alignment: props.alignment }))}
+      containerClassName={clsx("flex items-start p-6 md:p-12", variants({ alignment: props.alignment }))}
     >
+      {/* Here we use JSX for button and other content */}
       <div
-        className="w-full h-full object-cover relative z-20"
-        dangerouslySetInnerHTML={{ __html: customHtmlContent }} // Render custom HTML
-      />
+        className="w-full h-full object-cover relative z-[-1]"
+        style={{ backgroundColor: boxBgColor, borderRadius: `${boxBorderRadius}px` }}
+      >
+        <div className="text-center" style={{ color: boxTextColor }}>
+          {/* Render the custom HTML content */}
+          <div dangerouslySetInnerHTML={{ __html: customHtmlContent }} />
+          {/* Example of a clickable button */}
+          <button onClick={handleButtonClick} className="mt-4 px-6 py-2 bg-blue-500 text-white rounded">
+            Click Me
+          </button>
+        </div>
+      </div>
     </Section>
   );
 });
