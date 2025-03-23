@@ -33,24 +33,6 @@ export let themeSchema: HydrogenThemeSchema = {
       ],
     },
     {
-      group: "3D Model Section",  // Add a group for the 3D Model
-      inputs: [
-        {
-          type: "switch",
-          label: "Enable 3D Model",
-          name: "enable3DModel",
-          defaultValue: true,
-        },
-        {
-          type: "text",
-          label: "3D Model URL",
-          name: "modelUrl",
-          defaultValue: "https://cdn.shopify.com/3d/models/34d56510907ddc90/TestBat18_1_.glb",
-          helpText: "Enter the URL for the 3D model (GLB format).",
-        },
-      ],
-    },
-    {
       group: "Layout",
       inputs: [
         {

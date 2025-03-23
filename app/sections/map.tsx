@@ -22,7 +22,7 @@ let variants = cva("", {
   },
 });
 
-interface MapSectionProps
+interface CustomHtmlSectionProps
   extends Omit<SectionProps, "backgroundColor">,
     VariantProps<typeof variants>,
     LinkStyleProps {
@@ -37,7 +37,7 @@ interface MapSectionProps
   boxBorderRadius: number;
 }
 
-let MapSection = forwardRef<HTMLElement, MapSectionProps>((props, ref) => {
+let CustomHtmlSection = forwardRef<HTMLElement, CustomHtmlSectionProps>((props, ref) => {
   let {
     height,
     alignment,
@@ -80,7 +80,7 @@ let MapSection = forwardRef<HTMLElement, MapSectionProps>((props, ref) => {
         {description && <Paragraph content={description} />}
         {buttonText && (
           <Link
-            to={`https://www.google.com/maps/search/${description}`} // Change this to relevant URL or action
+            to="#"
             openInNewTab
             variant={buttonVariant}
             backgroundColor={backgroundColor}
@@ -98,10 +98,10 @@ let MapSection = forwardRef<HTMLElement, MapSectionProps>((props, ref) => {
   );
 });
 
-export default MapSection;
+export default CustomHtmlSection;
 
 export let schema: HydrogenComponentSchema = {
-  type: "map",  // You can keep the type as "map" or change it to something like "custom-html"
+  type: "custom-html",  // Change type to custom-html
   title: "Custom HTML Section",
   inspector: [
     {
