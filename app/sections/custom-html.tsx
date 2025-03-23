@@ -36,10 +36,10 @@ let CustomHtmlSection = forwardRef<HTMLElement, CustomHtmlSectionProps>((props, 
     <Section
       ref={ref}
       {...rest}
-      containerClassName={clsx("flex items-start p-6 md:p-12", variants({ alignment: props.alignment }))}
+      containerClassName={clsx("flex items-start p-6 md:p-12 relative", variants({ alignment: props.alignment }))}
     >
       <div
-        className="w-full h-full object-cover relative z-[-1]"
+        className="w-full h-full object-cover relative z-20"
         dangerouslySetInnerHTML={{ __html: customHtmlContent }} // Render custom HTML
       />
     </Section>
